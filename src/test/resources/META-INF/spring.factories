@@ -1,0 +1,6 @@
+org.springframework.test.context.ContextCustomizerFactory = \
+    com.coursecrafter.athleteservice.config.\
+    TestContainersSpringContextCustomizerFactory,com.coursecrafter.\
+    athleteservice.config.RedisTestContainersSpringContextCustomizerFactory,com.\
+    coursecrafter.athleteservice.config.\
+    KafkaTestContainersSpringContextCustomizerFactory

@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AthleteRepository extends MongoRepository<AthleteEntity, String> {
-    Optional<AthleteEntity> findByIdentityId(String identityId);
+    Optional<AthleteEntity> findByExternalId(String externalId);
 }

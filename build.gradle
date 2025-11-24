@@ -155,8 +155,6 @@ dependencies {
     implementation "org.springframework.cloud:spring-cloud-starter"
     implementation "org.springframework.cloud:spring-cloud-starter-bootstrap"
     implementation "org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j"
-    implementation "org.springframework.cloud:spring-cloud-starter-consul-config"
-    implementation "org.springframework.cloud:spring-cloud-starter-consul-discovery"
     implementation "org.springframework.retry:spring-retry"
     testImplementation "org.springframework.security:spring-security-test"
     implementation platform(libs.spring.cloud.dependencies)

@@ -38,11 +38,6 @@ spring:
     livereload:
       enabled: false
   cloud:
-    consul:
-      discovery:
-        prefer-ip-address: true
-      host: localhost
-      port: 8500
   data:
     mongodb:
       uri: mongodb://localhost:27017/athleteService

@@ -33,7 +33,7 @@ public class AthleteServiceImpl implements AthleteService {
     public AthleteDto getOrCreate(JwtUserIdentityDto jwtUserIdentityDto) {
         return athleteRepository
             .findByExternalId(jwtUserIdentityDto.getExternalId())
-            .map(athleteMapper::toDto)
+            .map(athlete -> athleteMapper.toDto(athlete))
             .orElseGet(() -> {
                 AthleteEntity athlete = AthleteEntity.fromJwtUserIdentity(jwtUserIdentityDto);
                 AthleteEntity saved = athleteRepository.save(athlete);
@@ -49,7 +49,6 @@ public class AthleteServiceImpl implements AthleteService {
         if (!externalId.equals(entity.getExternalId())) {
             throw new RuntimeException("Forbidden: athlete does not belong to current user");
         }
-
         if (request.getFirstName() != null) {
             entity.setFirstName(request.getFirstName());
         }
@@ -62,14 +61,41 @@ public class AthleteServiceImpl implements AthleteService {
         if (request.getStatus() != null) {
             entity.setStatus(request.getStatus());
         }
-        if (request.getAvatarKey() != null) {
-            entity.setAvatarKey(request.getAvatarKey());
+        if (request.getAvatarUrl() != null) {
+            entity.setAvatarUrl(request.getAvatarUrl());
         }
         if (request.getUnit() != null) {
             entity.setUnit(request.getUnit());
         }
         if (request.getDateOfBirth() != null) {
             entity.setDateOfBirth(request.getDateOfBirth());
+        }
+        if (request.getExperience() != null) {
+            entity.setExperience(request.getExperience());
+        }
+        if (request.getVolume() != null) {
+            entity.setVolume(request.getVolume());
+        }
+        if (request.getDaysAvailable() != null) {
+            entity.setDaysAvailable(request.getDaysAvailable());
+        }
+        if (request.getGoal() != null) {
+            entity.setGoal(request.getGoal());
+        }
+        if (request.getHasRace() != null) {
+            entity.setHasRace(request.getHasRace());
+        }
+        if (request.getRaceDistance() != null) {
+            entity.setRaceDistance(request.getRaceDistance());
+        }
+        if (request.getRaceName() != null) {
+            entity.setRaceName(request.getRaceName());
+        }
+        if (request.getRaceDate() != null) {
+            entity.setRaceDate(request.getRaceDate());
+        }
+        if (request.getTracking() != null) {
+            entity.setTracking(request.getTracking());
         }
 
         entity.setUpdatedAt(Instant.now());
@@ -79,7 +105,7 @@ public class AthleteServiceImpl implements AthleteService {
     }
 
     @Override
-    public AthleteDto updateAvatar(String athleteId, MultipartFile avatar) {
+    public String updateAvatar(String athleteId, MultipartFile avatar) {
         AthleteEntity athlete = athleteRepository
             .findById(athleteId)
             .orElseThrow(() -> new IllegalArgumentException("Athlete not found: " + athleteId));
@@ -88,10 +114,11 @@ public class AthleteServiceImpl implements AthleteService {
         String avatarPath = avatarStorageService.storeAvatar(athleteId, avatar);
 
         // Save on entity
-        athlete.setAvatarKey(avatarPath);
+        athlete.setAvatarUrl(avatarPath);
         athlete.setUpdatedAt(Instant.now());
 
         AthleteEntity saved = athleteRepository.save(athlete);
-        return athleteMapper.toDto(saved);
+
+        return avatarPath;
     }
 }

@@ -1,12 +1,9 @@
 package com.coursecrafter.athleteservice.contorller;
 
-import com.coursecrafter.athleteservice.domain.AthleteEntity;
 import com.coursecrafter.athleteservice.service.dto.AthleteDto;
 import com.coursecrafter.athleteservice.service.dto.AthleteUpdateRequest;
 import com.coursecrafter.athleteservice.service.dto.JwtUserIdentityDto;
 import com.coursecrafter.athleteservice.service.impl.AthleteServiceImpl;
-import java.util.Map;
-import java.util.UUID;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -48,7 +45,7 @@ public class AthleteController {
     }
 
     @PostMapping(path = "/{id}/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AthleteDto> uploadAvatar(@PathVariable String id, @RequestPart("avatar") MultipartFile avatarFile) {
+    public ResponseEntity<String> uploadAvatar(@PathVariable String id, @RequestPart("avatar") MultipartFile avatarFile) {
         return ResponseEntity.ok(athleteServiceImpl.updateAvatar(id, avatarFile));
     }
 }

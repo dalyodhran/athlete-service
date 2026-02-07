@@ -5,6 +5,7 @@ import com.coursecrafter.athleteservice.domain.enums.UnitSystem;
 import com.coursecrafter.athleteservice.service.dto.JwtUserIdentityDto;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,9 +29,18 @@ public class AthleteEntity implements java.io.Serializable {
     private String lastName;
     private String email;
     private AthleteProfileStatus status;
-    private String avatarKey;
+    private String avatarUrl;
     private LocalDate dateOfBirth;
     private UnitSystem unit;
+    private String experience;
+    private String volume;
+    private List<String> daysAvailable;
+    private String goal;
+    private Boolean hasRace;
+    private String raceDistance;
+    private String raceName;
+    private String raceDate;
+    private String tracking;
     private Instant createdAt;
     private Instant updatedAt;
 

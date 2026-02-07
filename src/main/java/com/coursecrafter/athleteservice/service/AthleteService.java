@@ -9,5 +9,5 @@ import org.springframework.web.multipart.MultipartFile;
 public interface AthleteService {
     AthleteDto getOrCreate(JwtUserIdentityDto jwtUserIdentityDto);
     AthleteDto partialUpdate(String id, AthleteUpdateRequest request, String externalId);
-    AthleteDto updateAvatar(String athleteId, MultipartFile avatar);
+    String updateAvatar(String athleteId, MultipartFile avatar);
 }
